@@ -25,6 +25,7 @@ set(VEC_FILES
   aggregate_functions/aggregate_function_distinct.cpp
   aggregate_functions/aggregate_function_sum.cpp
   aggregate_functions/aggregate_function_min_max.cpp
+  aggregate_functions/aggregate_function_ndv.cpp
   aggregate_functions/aggregate_function_null.cpp
   aggregate_functions/aggregate_function_uniq.cpp
   aggregate_functions/aggregate_function_hll_union_agg.cpp
