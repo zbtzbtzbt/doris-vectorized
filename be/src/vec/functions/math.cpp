@@ -21,6 +21,8 @@
 #include "vec/functions/function_math_binary_float64.h"
 #include "vec/functions/function_math_unary.h"
 #include "vec/functions/function_unary_arithmetic.h"
+#include "vec/functions/function_totype.h"
+#include "vec/functions/function_string.h"
 #include "vec/functions/simple_function_factory.h"
 
 namespace doris::vectorized {
@@ -182,8 +184,12 @@ struct HexIntImpl {
             
             std::stringstream ss;
             ss << std::hex << std::uppercase << data[i];
-            
-            buffer.push_back(ss.str());
+    
+            std::string s;
+            ss >> s;
+            for (auto c:s) {
+                buffer.push_back(c);
+            }
             
             StringOP::push_value_string(std::string_view(buffer.data(), buffer.size()), i,
                                         res_data, res_offsets);
@@ -193,6 +199,7 @@ struct HexIntImpl {
         
         /*
          * BigIntVal
+        Todo
         if (v.is_null) {
             return StringVal::null();
         }
