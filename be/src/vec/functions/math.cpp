@@ -168,12 +168,11 @@ struct HexName {
 
 struct HexIntImpl {
     using ReturnType = DataTypeString;
-    static constexpr auto TYPE_INDEX = TypeIndex::String;
-    using Type = String;
-    using ReturnColumnType = ColumnVector<String>;
+    static constexpr auto TYPE_INDEX = TypeIndex::Int64;
+    using Type = Int64;
+    using ReturnColumnType = ColumnString;
     
-    // input type:int32 , output type:string
-    static Status vector(const ColumnInt32::Container& data, ColumnString::Chars& res_data,
+    static Status vector(const ColumnInt64::Container& data, ColumnString::Chars& res_data,
                          ColumnString::Offsets& res_offsets) {
         
         res_offsets.resize(data.size());
@@ -181,33 +180,25 @@ struct HexIntImpl {
         fmt::memory_buffer buffer;
         for (size_t i = 0; i < input_size; ++i) {
             buffer.clear();
-            
+            LOG(INFO) << "data[i]: " << data[i];
             std::stringstream ss;
             ss << std::hex << std::uppercase << data[i];
-    
+            // Todo faster hex
+            LOG(INFO) << "ss: " << ss.str();
             std::string s;
             ss >> s;
             for (auto c:s) {
                 buffer.push_back(c);
             }
-            
+            LOG(INFO) << "buffer.data(): " << buffer.data();
             StringOP::push_value_string(std::string_view(buffer.data(), buffer.size()), i,
                                         res_data, res_offsets);
-            
         }
         return Status::OK();
-        
-        /*
-         * BigIntVal
-        Todo
-        if (v.is_null) {
-            return StringVal::null();
-        }
-        */
     }
 };
 
-using FunctionHexInt = FunctionUnaryToType<HexName, HexIntImpl>;
+using FunctionHexInt = FunctionUnaryToType<HexIntImpl, HexName>;
 
 template <typename A>
 struct SignImpl {
