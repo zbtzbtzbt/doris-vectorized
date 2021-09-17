@@ -162,17 +162,17 @@ struct CeilName {
 };
 using FunctionCeil = FunctionMathUnary<UnaryFunctionVectorized<CeilName, std::ceil, DataTypeInt64>>;
 
-struct HexName {
-    static constexpr auto name = "hex";
+struct Hex32Name {
+    static constexpr auto name = "hex32";
 };
 
-struct HexIntImpl {
+struct HexInt32Impl {
     using ReturnType = DataTypeString;
-    static constexpr auto TYPE_INDEX = TypeIndex::Int64;
-    using Type = Int64;
+    static constexpr auto TYPE_INDEX = TypeIndex::Int32;
+    using Type = Int32;
     using ReturnColumnType = ColumnString;
     
-    static Status vector(const ColumnInt64::Container& data, ColumnString::Chars& res_data,
+    static Status vector(const ColumnInt32::Container& data, ColumnString::Chars& res_data,
                          ColumnString::Offsets& res_offsets) {
         
         res_offsets.resize(data.size());
@@ -198,7 +198,7 @@ struct HexIntImpl {
     }
 };
 
-using FunctionHexInt = FunctionUnaryToType<HexIntImpl, HexName>;
+using FunctionHexInt = FunctionUnaryToType<HexInt32Impl, Hex32Name>;
 
 template <typename A>
 struct SignImpl {

@@ -598,6 +598,8 @@ visible_functions = [
 
     [['bin'], 'VARCHAR', ['BIGINT'],
             '_ZN5doris13MathFunctions3binEPN9doris_udf15FunctionContextERKNS1_9BigIntValE', '', '', '', ''],
+    [['hex32'], 'VARCHAR', ['INT'],
+     '_ZN5doris13MathFunctions9hex_int32EPN9doris_udf15FunctionContextERKNS1_6IntValE', '', '', 'vec', ''],
     [['hex'], 'VARCHAR', ['BIGINT'],
             '_ZN5doris13MathFunctions7hex_intEPN9doris_udf15FunctionContextERKNS1_9BigIntValE', '', '', 'vec', ''],
     [['hex'], 'VARCHAR', ['VARCHAR'],

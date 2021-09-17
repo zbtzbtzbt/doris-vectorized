@@ -318,6 +318,14 @@ StringVal MathFunctions::bin(FunctionContext* ctx, const BigIntVal& v) {
     } while (n >>= 1);
     return AnyValUtil::from_buffer_temp(ctx, result + index, max_bits - index);
 }
+StringVal MathFunctions::hex_int32(FunctionContext* ctx, const IntVal& v) {
+    if (v.is_null) {
+        return StringVal::null();
+    }
+    std::stringstream ss;
+    ss << std::hex << std::uppercase << v.val;
+    return AnyValUtil::from_string_temp(ctx, ss.str());
+}
 
 StringVal MathFunctions::hex_int(FunctionContext* ctx, const BigIntVal& v) {
     if (v.is_null) {
