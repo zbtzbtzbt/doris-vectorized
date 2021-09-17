@@ -198,7 +198,7 @@ struct HexInt32Impl {
     }
 };
 
-using FunctionHexInt = FunctionUnaryToType<HexInt32Impl, Hex32Name>;
+using FunctionHexInt32 = FunctionUnaryToType<HexInt32Impl, Hex32Name>;
 
 template <typename A>
 struct SignImpl {
@@ -369,6 +369,7 @@ void register_function_math(SimpleFunctionFactory& factory) {
     factory.register_function<FunctionLog10>();
     factory.register_alias("log10", "dlog10");
     factory.register_function<FunctionPi>();
+    factory.register_function<FunctionHexInt32>();
     factory.register_function<FunctionSign>();
     factory.register_function<FunctionAbs>();
     factory.register_function<FunctionNegative>();
